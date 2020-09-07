@@ -1,0 +1,13 @@
+<h1>this is home</h1>
+{{request}}
+<h2>
+    {{object.title}}
+    {{object.price}}
+    <ul>
+
+    {% for item in ls %}
+    <li>{{item}}</li>
+    {% endfor %}    </ul>
+
+</h2>
+<p>hey im from home</p>
