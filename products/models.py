@@ -13,7 +13,7 @@ class Products(models.Model):
     dt = models.DateField(default=datetime.date.today())
 
     def get_absolute_url(self):
-        return f"/products/{self.id}"
-        # return reverse("products:dynamic_routing", kwargs={'id': self.id})  #dynamic
+        # return f"/products/{self.id}"
+        return reverse("products:dynamic_routing", kwargs={'id': self.id})  #dynamic
 
 
