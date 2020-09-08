@@ -6,10 +6,9 @@
 </head>
 <body>
 <h1> HEy babes</h1>
-    <h1>{{object.title}}</h1>
-    <h3>{{object.price}}</h3>
-    <p>{{object.desc}}</p>
-    <p>{{object.summary}}</p>
+    {% for item in object %}
+        <p>{{item.id}}. <a href="{{ item.get_absolute_url }}">{{item.title}}</a></p>
+    {% endfor %}
     <button>{{object.check}}</button>
 </body>
 </html>
