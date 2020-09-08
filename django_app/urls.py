@@ -22,7 +22,7 @@ urlpatterns = [
     path('products/', include('products.urls')),
     path('contact/', contact_view, name='contact'),
     path('about/', about_view, name='about'),
-    # url(r'^produc/(?P<id>\d+)/', dynamic_url_routing, name='dynamic_routing'),
+    url(r'^produc/(?P<id>\d+)/', dynamic_url_routing, name='dynamic_routing'),
     # url('produc/form/', product_form_view, name='product_form'),
 
     path('admin/', admin.site.urls),
