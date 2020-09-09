@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Polls home</title>
+</head>
+<body>
+
+{% for item in obj %}
+<p><a href="{% url 'detail' item.id %}" style='text-decoration: None'>{{item.id}}. {{item.question_text}} </a></p>
+
+{% endfor %}
+<h1>Polls home</h1>
+</body>
+</html>

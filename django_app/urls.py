@@ -16,14 +16,12 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.urls import path
 from django.contrib import admin
-from products.views import contact_view, about_view, product_form_view, dynamic_url_routing
-
+from products.views import contact_view, about_view, home_view
 urlpatterns = [
+    path('', home_view, name='Home'),
+    path('polls/', include('polls.urls')),
     path('products/', include('products.urls')),
     path('contact/', contact_view, name='contact'),
     path('about/', about_view, name='about'),
-    url(r'^produc/(?P<id>\d+)/', dynamic_url_routing, name='dynamic_routing'),
-    # url('produc/form/', product_form_view, name='product_form'),
-
     path('admin/', admin.site.urls),
 ]

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Polls Detail</title>
+</head>
+<body>
+    <h1>Polls detail page</h1>
+<p>Question:  {{obj.question_text}} ? </p>
+    <p> Published:  {{obj.pub_date}} </p>
+    <ul>
+        {% for item in obj.choice_set.all %}
+        <p><li>{{item.choice_text}}</li></p>
+        {% endfor %}
+
+    </ul>
+</body>
+</html>
