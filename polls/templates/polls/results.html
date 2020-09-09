@@ -6,7 +6,15 @@
 </head>
 <body>
 <h1>Polls result page</h1>
-<p>Question: {{obj.question_text}} ?</p>
+<p>Question: {{question.question_text}} ?</p>
+<ul>
+    {% for choice in question.choice_set.all %}
+    <li> {{choice.choice_text}}:  {{choice.votes}}  vote{{ choice.votes|pluralize }}</li>
+    {% endfor %}
+</ul>
 
+<button>
+    <a href="{% url 'polls:polls_home' %}">Back To polls</a>
+</button>
 </body>
 </html>

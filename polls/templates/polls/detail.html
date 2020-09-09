@@ -5,14 +5,22 @@
     <title>Polls Detail</title>
 </head>
 <body>
-    <h1>Polls detail page</h1>
-<p>Question:  {{obj.question_text}} ? </p>
-    <p> Published:  {{obj.pub_date}} </p>
-    <ul>
-        {% for item in obj.choice_set.all %}
-        <p><li>{{item.choice_text}}</li></p>
-        {% endfor %}
+<h1>Polls detail page</h1>
 
-    </ul>
+<h1>{{ question.question_text }}</h1>
+
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="{% url 'polls:votes' question.id %}" method="post">
+    {% csrf_token %}
+    {% for choice in question.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+    <br>
+    {% endfor %}
+    <input type="submit" value="Vote">
+</form>
 </body>
 </html>

@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-from django.http import Http404
+from django.views import generic
+from django.urls import reverse
+from django.http import Http404, HttpResponseRedirect
 from .models import Question, Choice
 
 def polls_home_view(request):
@@ -37,20 +39,34 @@ def detail_view(request, q_id):
     #shortcut
     q = get_object_or_404(Question, id=q_id)
     context = {
-        "obj": q
+        "question": q
     }
     return render(request, "polls/detail.html", context)
 
-def results_view(request, q_id):
-    q = Question.objects.get(id=q_id)
-    context = {
-        "obj": q
-    }
-    return render(request, "polls/results.html", context)
+class ResultsView(generic.DeleteView):
+    model = Question
+    template_name = 'polls/results.html'
+    # q = Question.objects.get(id=q_id)
+    # context = {
+    #     "question": q
+    # }
+    # return render(request, "polls/results.html", context)
 
 def vote_view(request, q_id):
-    q = Question.objects.get(id=q_id)
-    context = {
-        'obj': q
-    }
-    return render(request, 'polls/votes.html', context)
+    print(q_id, "hey vote view is called")
+    print(request.POST)
+
+    q = get_object_or_404(Question, id=q_id)
+    try:
+        selected_choice = q.choice_set.get(pk=request.POST['choice'])
+    except (KeyError, Choice.DoesNotExist):
+        return render(request, "polls/detail.html", {
+            "question": q,
+            "error_message": "You didn't select a choice",
+        })
+    else:
+        selected_choice.votes += 1
+        selected_choice.save()
+
+        # return render(request, "polls/results.html", {'question': q})
+        return HttpResponseRedirect(reverse('polls:result', args=(q.id, )))

@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Polls home</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/polls_home.css' %}">
+
 </head>
+
 <body>
 
 {% for item in obj %}
-<p><a href="{% url 'detail' item.id %}" style='text-decoration: None'>{{item.id}}. {{item.question_text}} </a></p>
+<p><a href="{% url 'polls:detail' item.id %}" >{{item.id}}. {{item.question_text}} </a></p>
 
 {% endfor %}
 <h1>Polls home</h1>

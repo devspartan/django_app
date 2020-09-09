@@ -1,0 +1,13 @@
+body{
+text-decoration: None;
+color: green;
+}
+
+a{
+  color: black;
+  text-decoration: None;
+}
+a:hover{
+color: red;
+}
+
