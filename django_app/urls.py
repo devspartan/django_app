@@ -17,7 +17,10 @@ from django.conf.urls import include, url
 from django.urls import path
 from django.contrib import admin
 from products.views import contact_view, about_view, home_view
+
+
 urlpatterns = [
+
     path('', home_view, name='Home'),
     path('polls/', include('polls.urls')),
     path('products/', include('products.urls')),
